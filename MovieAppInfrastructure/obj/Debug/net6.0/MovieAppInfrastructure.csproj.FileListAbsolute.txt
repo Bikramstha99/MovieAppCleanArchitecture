@@ -1,0 +1,17 @@
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppInfrastructure.deps.json
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppInfrastructure.dll
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppInfrastructure.pdb
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppApplication.dll
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppDomain.dll
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppApplication.pdb
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\bin\Debug\net6.0\MovieAppDomain.pdb
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.csproj.CopyComplete
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.dll
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\refint\MovieAppInfrastructure.dll
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\MovieAppInfrastructure.pdb
+C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppInfrastructure\obj\Debug\net6.0\ref\MovieAppInfrastructure.dll
