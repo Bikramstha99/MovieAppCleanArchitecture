@@ -1,0 +1,204 @@
+﻿@model MovieAppPresentation.ViewModel.MovieVM
+
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+        <dd>
+            <img src="@Model.MoviePhoto" style="width: 220px; height: 250px; cursor:pointer" />
+        </dd>
+        <dt>
+        <br />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Director)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Director)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        
+    </dl>
+</div>
+@*<div>
+    @if (User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Admin.ToString()))
+    {
+        <br />
+        <div>          
+            <a asp-action="Edit" class="btn btn-secondary" asp-route-id="@Model?.Id">Edit</a>
+            <a asp-action="Delete" class="btn btn-danger" asp-route-id="@Model.Id">Delete</a>
+        </div>
+    }
+</div>
+*@
+
+@*<div class="averageRatingContainer">
+    <h6 style="display:inline;">Average Rating :</h6>
+    <span id="average-rating">
+        @for (int i = 0; i < (int)Model.AverageRating; i++)
+        {
+            <span style="color: orange; font-size: 28px;">&#9733;</span>
+        }
+        @if (Model.AverageRating - (int)Model.AverageRating >= 0.5)
+        {
+            <span class="half-star">&#9733;</span>
+        }
+    </span>
+</div>
+*@
+@*@if (User.Identity.IsAuthenticated)
+{
+    
+    <partial name="../Rating/_AddRating" model="@Model?.Id" />
+
+
+}*@
+@*<partial name="../Rating/_AddRating" model="@Model?.Id" />*@
+
+
+
+@*<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            <b>Comment Section</b>
+        </div>
+        <div class="card-body">
+            <div>
+                @foreach (var comment in ViewBag.Comments)
+                {
+                    <div>
+                        <p>@comment.CommentDesc</p>
+                        <small class="text-muted">Posted By @comment.CommentId @comment.UserName on @comment.TimeStamp </small>
+                        <br>
+
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == comment.UserName)
+                        {
+                            <a class="btn btn-primary btn-sm btn-edit" asp-controller="Comment" asp-action="Edit" asp-route-CommentId="@comment.CommentId">Edit</a>
+
+                            <a class="btn btn-danger btn-sm" asp-controller="Comment" asp-action="Delete" asp-route-CommentId="@comment.CommentId" asp-route-MovieId="@comment.MovieId">Delete</a>
+                        }
+                        
+                        <hr>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}*@
+@*@if (User.Identity.IsAuthenticated)
+{
+
+    <form id="commentForm" method="post" asp-action="Create" asp-controller="Comment">
+        <div class="form-group">
+            <input type="hidden" name="MovieId" value="@Model.Id" />
+            <label class="fw-bold">Write Your Comment.</label>
+            <textarea class="form-control" rows="3" name="CommentDesc" placeholder="Comments are written here :)"></textarea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success" id="btnComment">Leave Your Comment</button>
+    </form>
+    }
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                $('#submitRatingButton').show();
+            });
+        });
+        $(document).ready(function () {
+            $('#submitRatingButton').click(function (event) {
+                event.preventDefault();
+
+                var rating = $('input[name="rating"]:checked').val();
+
+                var movieId = $('input[name="MovieId"]').val();
+                var data = {
+                    MovieId: movieId,
+                    Ratings: rating                  
+                };
+                $.ajax({
+                    url: '@Url.Action("SubmitRating", "Rating")',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        var $responseHtml = $(response);
+                        var $newRating = $responseHtml.find('#ratingList > div:last-child');
+                        
+
+                        if ($newRating.length > 0) {
+                            var updatedRatingId = $newRating.find('div').data('rating-id');
+                            var newRatingValue = $newRating.find('p').text();
+                            var $updatedContent = $responseHtml.find('#average-rating');
+
+                            $('#average-rating').html($updatedContent);
+
+                            // Find the existing rating element based on movie ID and rating ID
+                            var $existingRating = $('#ratingList').find(`div[data-rating-id="${updatedRatingId}"]`);
+
+                            if ($existingRating.length > 0) {
+                                // Update the existing rating value
+                                $existingRating.find('p').text(newRatingValue);
+                            } else {
+                                // Create a new rating element
+                                $('#ratingList').append($newRating);
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response
+                        console.log(error);
+                    }
+                });
+            });
+        });
+        //for showing and hiding the rating
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#showRatingsButton').click(function () {
+                if ($('#ratingList').is(':hidden')) {
+                    $('#ratingList').slideDown();
+                    $(this).text('Hide Ratings');
+                } else {
+                    $('#ratingList').slideUp();
+                    $(this).text('Show Ratings');
+                }
+            });
+        });
+    </script>
+}
+*@
+    
+
+    
+

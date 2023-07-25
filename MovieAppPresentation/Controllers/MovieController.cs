@@ -26,15 +26,15 @@ namespace MovieAppPresentation.Controllers
             //_iRating = iRating;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            //int pageNumber = page ?? 1;
-            //int pageSize = 3;
+            int pageNumber = page;
+            int pageSize = 3;
             var movies = _iMovie.GetAllMovies();
-            var movieViewModels = new List<UpdateMovie>();
+            var movieViewModels = new List<MovieVM>();
             foreach (var movie in movies)
             {
-                movieViewModels.Add(new UpdateMovie
+                movieViewModels.Add(new MovieVM
                 {
                     Id = movie.Id,
                     Name = movie.Name,
@@ -42,21 +42,20 @@ namespace MovieAppPresentation.Controllers
                     Director = movie.Director,
                     MoviePhoto = movie.MoviePhoto,
                     Genre = movie.Genre,
-                    // Map other properties as needed...
                 });
             }
+            int totalMovies = movies.Count;
+            int totalPages = (int)Math.Ceiling(totalMovies / (double)pageSize);
 
+            //starting index of each page
+            int startIndex = (pageNumber - 1) * pageSize;
 
+            //skip skips first specified number of data and take takes the specified number of data
+            //var pagedMovies = movies.Skip(startIndex).Take(pageSize)
+            //    {
 
-            //int totalMovies = movies.Count;
-            //int totalPages = (int)Math.Ceiling(totalMovies / (double)pageSize);
-
-            ////starting index of each page
-            //int startIndex = (pageNumber - 1) * pageSize;
-
-            ////skip skips first specified number of data and take takes the specified number of data
-            //var pagedMovies = movies.Skip(startIndex).Take(pageSize).ToList();
-            //var pager = new PagerVM
+            //}
+            //var pager = new MovieAppPresentation.ViewModel.PagerVM
             //{
             //    Movies = pagedMovies,
             //    PageNumber = pageNumber,
@@ -74,7 +73,7 @@ namespace MovieAppPresentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AddMovie addmovie)
+        public IActionResult Create(MovieVM addmovie)
         {
             var image = Request.Form.Files.FirstOrDefault();
             var fileName = Guid.NewGuid().ToString();
@@ -101,56 +100,103 @@ namespace MovieAppPresentation.Controllers
             return RedirectToAction("Index");
 
         }
-    }
-}
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            var movie = _iMovie.GetByID(Id);
+            MovieVM movievm = new MovieVM()
+            {
+                Id = movie.Id,
+                Name = movie.Name,
+                Director = movie.Director,
+                Description = movie.Description,
+                MoviePhoto = movie.MoviePhoto,
+                Genre = movie.Genre,
+            };
+            return View(movievm);
+            
+
+            
+        }
+
         //[Authorize(Roles = "Admin")]
         //[HttpGet]
-        //public IActionResult Edit(int Id)
-        //{
-        //    var movie = _iMovie.GetByID(Id);
-        //    return View(movie);
-        //}
+        public IActionResult Edit(int Id)
+        {
+            var movie = _iMovie.GetByID(Id);
+            MovieVM movies = new MovieVM()
+            {
+                Id = movie.Id,
+                Name = movie.Name,
+                Director = movie.Director,
+                Description = movie.Description,
+                MoviePhoto = movie.MoviePhoto,
+                Genre = movie.Genre,
+            };
+
+           
+
+            return View(movies);
+        }
         //[Authorize(Roles = "Admin")]
         //[HttpPost]
-        //public IActionResult Edit(UpdateMovie updatemovie)
-        //{
-        //    var images = Request.Form.Files.FirstOrDefault();
-        //    var fileName = Guid.NewGuid().ToString();
-        //    var path = $@"updateimages\";
-        //    var wwwRootPath = _iwebhostenvironment.WebRootPath;
-        //    var uploads = Path.Combine(wwwRootPath, path);
-        //    var extension = Path.GetExtension(images.FileName);
-        //    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-        //    {
-        //        images.CopyTo(fileStreams);
-        //    }
-        //    updatemovie.MoviePhoto = $"\\updateimages\\{fileName}" + extension;
-        //    _iMovie.UpdateMovies(updatemovie);
-        //    return RedirectToAction("Index");
+        public IActionResult Edit(MovieVM editmovie)
+        {
+            var images = Request.Form.Files.FirstOrDefault();
+            var fileName = Guid.NewGuid().ToString();
+            var path = $@"updateimages\";
+            var wwwRootPath = _iwebhostenvironment.WebRootPath;
+            var uploads = Path.Combine(wwwRootPath, path);
+            var extension = Path.GetExtension(images.FileName);
+            using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                images.CopyTo(fileStreams);
+            }
+            editmovie.MoviePhoto = $"\\updateimages\\{fileName}" + extension;
+            Movies movie = new Movies()
+            {
+                Id = editmovie.Id,
+                Name = editmovie.Name,
+                Director = editmovie.Director,
+                Description = editmovie.Description,
+                MoviePhoto = editmovie.MoviePhoto,
+                Genre = editmovie.Genre,
+            };
+            _iMovie.UpdateMovies(movie);
+            return RedirectToAction("Index");
 
-//}
-//        [HttpGet]
-//        public IActionResult Delete(int id)
-//        {
-//            var movie = _iMovie.GetByID(id);
-//            return View(movie);
+        }
 
-//        }
-//        [HttpPost]
-//        public IActionResult DeleteId(int Id)
-//        {
-//            _iMovie.DeleteMovies(Id);
+        [HttpPost]
+        public IActionResult DeleteId(int Id)
+        {
+            _iMovie.DeleteMovies(Id);
 
-//            return RedirectToAction("Index");
-//        }
-//        [HttpGet]
-//        public IActionResult Details(int id)
-//        {
-//            var movie = _iMovie.GetByID(id);
-//            //ViewBag.Comments = _iComment.GetComments(id);
-//            //ViewBag.Ratings = _iRating.GetRatings(id);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var movie = _iMovie.GetByID(id);
+            MovieVM movies = new MovieVM()
+            {
+                Id = movie.Id,
+                Name = movie.Name,
+                Director = movie.Director,
+                Description = movie.Description,
+                MoviePhoto = movie.MoviePhoto,
+                Genre = movie.Genre,
+            };
 
-//            return View(movie);
-//        }
-//    }
-//}
+            //ViewBag.Comments = _iComment.GetComments(id);
+            //ViewBag.Ratings = _iRating.GetRatings(id);
+
+            return View(movies);
+        }
+    }
+}
+
+
+
+

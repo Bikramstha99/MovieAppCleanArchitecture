@@ -15,3 +15,20 @@ C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieApp
 C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\ref\MovieAppApplication.dll
 C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppApplication.runtimeconfig.json
 C:\Users\Acer\OneDrive\Desktop\C# console app\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.genruntimeconfig.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppApplication.deps.json
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppApplication.runtimeconfig.json
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppApplication.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppApplication.pdb
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppDomain.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\bin\Debug\net6.0\MovieAppDomain.pdb
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.csproj.CopyComplete
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\refint\MovieAppApplication.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.pdb
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\MovieAppApplication.genruntimeconfig.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppApplication\obj\Debug\net6.0\ref\MovieAppApplication.dll

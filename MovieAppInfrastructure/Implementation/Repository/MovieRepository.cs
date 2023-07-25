@@ -25,43 +25,33 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
             return true;
         }
 
-        //public UpdateMovie GetByID(int Id)
-        //{
-        //    var movie = _movieDbContext.Movies.Find(Id);
-        //    var viewmodel = new UpdateMovie()
-        //    {
-        //        Id = movie.Id,
-        //        Name = movie.Name,
-        //        Genre = movie.Genre,
-        //        MoviePhoto = movie.MoviePhoto,
-        //        Director = movie.Director,
-        //        AverageRating = movie.AverageRating,
-        //        Description = movie.Description,
-        //    };
-        //    return viewmodel;
-        //}
+        public Movies GetByID(int Id)
+        {
+            var movie = _movieDbContext.Movies.Find(Id);   
+            return movie;
+        }
 
-        //public bool UpdateMovies(UpdateMovie updatemovie)
-        //{
-        //    var movie = _movieDbContext.Movies.Find(updatemovie.Id);
-        //    movie.Id = updatemovie.Id;
-        //    movie.Name = updatemovie.Name;
-        //    movie.Genre = updatemovie.Genre;
-        //    movie.MoviePhoto = updatemovie.MoviePhoto;
-        //    movie.Director = updatemovie.Director;
-        //    movie.Description = updatemovie.Description;
-        //    movie.AverageRating = updatemovie.AverageRating;
-        //    _movieDbContext.SaveChanges();
-        //    return true;
-        //}
+        public bool UpdateMovies(Movies movie)
+        {
+            var movies = _movieDbContext.Movies.Find(movie.Id);
+            movie.Id = movie.Id;
+            movie.Name = movie.Name;
+            movie.Genre = movie.Genre;
+            movie.MoviePhoto = movie.MoviePhoto;
+            movie.Director = movie.Director;
+            movie.Description = movie.Description;
+            movie.AverageRating = movie.AverageRating;
+            _movieDbContext.SaveChanges();
+            return true;
+        }
 
-        //public bool DeleteMovies(int Id)
-        //{
-        //    var movie = _movieDbContext.Movies.Find(Id);
-        //    _movieDbContext.Movies.Remove(movie);
-        //    _movieDbContext.SaveChanges();
-        //    return true;
-        //}
+        public bool DeleteMovies(int Id)
+        {
+            var movie = _movieDbContext.Movies.Find(Id);
+            _movieDbContext.Movies.Remove(movie);
+            _movieDbContext.SaveChanges();
+            return true;
+        }
 
         public List<Movies> GetAllMovies()
         {

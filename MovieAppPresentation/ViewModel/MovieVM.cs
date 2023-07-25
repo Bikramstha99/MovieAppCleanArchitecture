@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MovieAppPresentation.ViewModel
 {
-    public class AddMovie
+    public class MovieVM
     {
         [Key]
         public int Id { get; set; }
@@ -22,6 +22,6 @@ namespace MovieAppPresentation.ViewModel
         [Display(Name = "Insert an Image")]
         public double AverageRating { get; set; }
         public string MoviePhoto { get; set; }
-
+        public List<MovieVM> Movies { get; set; }
     }
 }

@@ -7,9 +7,9 @@ namespace MovieAppApplication.Interface.IRepository
     public interface IMovieRepository 
     {
         bool AddMovies(Movies movie);
-        //bool UpdateMovies(UpdateMovie updatemovie);
-        //bool DeleteMovies(int Id);
-        //UpdateMovie GetByID(int Id);
+        bool UpdateMovies(Movies movie);
+        bool DeleteMovies(int Id);
+        Movies GetByID(int Id);
         List<Movies> GetAllMovies();
     }
 }

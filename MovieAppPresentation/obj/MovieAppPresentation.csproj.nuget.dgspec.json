@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj": {}
+    "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
+    "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj",
         "projectName": "MovieAppApplication",
-        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj",
+        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\obj\\",
+        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
               }
             }
           }
@@ -87,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
+    "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj",
         "projectName": "MovieAppDomain",
-        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj",
+        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\obj\\",
+        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -142,14 +142,14 @@
         }
       }
     },
-    "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj": {
+    "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj",
         "projectName": "MovieAppInfrastructure",
-        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj",
+        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -166,11 +166,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj"
               },
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
               }
             }
           }
@@ -210,14 +210,14 @@
         }
       }
     },
-    "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj": {
+    "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
         "projectName": "MovieAppPresentation",
-        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
+        "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\obj\\",
+        "outputPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -235,14 +235,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppApplication\\MovieAppApplication.csproj"
               },
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppDomain\\MovieAppDomain.csproj"
               },
-              "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj": {
-                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj"
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppInfrastructure\\MovieAppInfrastructure.csproj"
               }
             }
           }

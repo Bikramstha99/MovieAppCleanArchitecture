@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ki+mq+MzOsKgiEyqMooQFM9sK2x/Gv5gFAmZPX65RvT3boAT9KLLz+PFgsGz7kTqDaSSGTnHHBjiCn0IQmNnFA==",
+  "dgSpecHash": "SM9aTiX2gI6dcDoYehXYvd3fQaodDw4XWwuH9J9dvJkKa6ug1BA/wZjrm91CTwvmfLM5xX11BeWSTXgCuG5HcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C# console app\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
+  "projectFilePath": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\MovieAppPresentation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Acer\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
