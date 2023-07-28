@@ -1,6 +1,6 @@
 ﻿using MovieAppApplication.Interface.IRepository;
-using MovieAppApplication.Persistance;
 using MovieAppDomain.Entities;
+using MovieAppInfrastructure.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;

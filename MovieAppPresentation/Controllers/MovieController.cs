@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using MovieAppApplication.Interface.IRepository;
 using MovieAppDomain.Entities;
@@ -11,20 +11,21 @@ namespace MovieAppPresentation.Controllers
     {
         private readonly IMovieRepository _iMovie;
         private readonly IWebHostEnvironment _iwebhostenvironment;
-        //private readonly ICommentRepository _iComment;
-        //private readonly IRatingRepository _iRating;
+        private readonly ICommentRepository _iComment;
+        private readonly IRatingRepository _iRating;
 
         public MovieController(
             IMovieRepository imovie,
-            IWebHostEnvironment iwebhostenvironment)
-        //ICommentRepository iComment,
-        //IRatingRepository iRating)
+            IWebHostEnvironment iwebhostenvironment,
+            ICommentRepository iComment,
+            IRatingRepository iRating)
         {
             _iMovie = imovie;
             _iwebhostenvironment = iwebhostenvironment;
-            //_iComment = iComment;
-            //_iRating = iRating;
+            _iComment = iComment;
+            _iRating = iRating;
         }
+        //To show the list of movie 
         [HttpGet]
         public IActionResult Index(int page)
         {
@@ -44,27 +45,24 @@ namespace MovieAppPresentation.Controllers
                     Genre = movie.Genre,
                 });
             }
-            int totalMovies = movies.Count;
+            int totalMovies = movieViewModels.Count;
             int totalPages = (int)Math.Ceiling(totalMovies / (double)pageSize);
 
             //starting index of each page
             int startIndex = (pageNumber - 1) * pageSize;
 
             //skip skips first specified number of data and take takes the specified number of data
-            //var pagedMovies = movies.Skip(startIndex).Take(pageSize)
-            //    {
+            var pagedMovies = movieViewModels.Skip(startIndex).Take(pageSize).ToList();
+            var pager = new PagerVM
+            {
+                Movies = pagedMovies,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalMovies = totalMovies,
+                TotalPages = totalPages
+            };
 
-            //}
-            //var pager = new MovieAppPresentation.ViewModel.PagerVM
-            //{
-            //    Movies = pagedMovies,
-            //    PageNumber = pageNumber,
-            //    PageSize = pageSize,
-            //    TotalMovies = totalMovies,
-            //    TotalPages = totalPages
-            //};
-
-            return View(movieViewModels);
+            return View(pager);
         }
         [HttpGet]
         public IActionResult Create()
@@ -100,6 +98,7 @@ namespace MovieAppPresentation.Controllers
             return RedirectToAction("Index");
 
         }
+        //To Delete the data
 
         [HttpGet]
         public IActionResult Delete(int Id)
@@ -114,14 +113,19 @@ namespace MovieAppPresentation.Controllers
                 MoviePhoto = movie.MoviePhoto,
                 Genre = movie.Genre,
             };
-            return View(movievm);
-            
+            return View(movievm);          
+        }
 
-            
+        [HttpPost]
+        public IActionResult DeleteId(int Id)
+        {
+            _iMovie.DeleteMovies(Id);
+
+            return RedirectToAction("Index");
         }
 
         //[Authorize(Roles = "Admin")]
-        //[HttpGet]
+        [HttpGet]
         public IActionResult Edit(int Id)
         {
             var movie = _iMovie.GetByID(Id);
@@ -134,13 +138,10 @@ namespace MovieAppPresentation.Controllers
                 MoviePhoto = movie.MoviePhoto,
                 Genre = movie.Genre,
             };
-
-           
-
             return View(movies);
         }
         //[Authorize(Roles = "Admin")]
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Edit(MovieVM editmovie)
         {
             var images = Request.Form.Files.FirstOrDefault();
@@ -166,18 +167,36 @@ namespace MovieAppPresentation.Controllers
             _iMovie.UpdateMovies(movie);
             return RedirectToAction("Index");
 
-        }
-
-        [HttpPost]
-        public IActionResult DeleteId(int Id)
-        {
-            _iMovie.DeleteMovies(Id);
-
-            return RedirectToAction("Index");
-        }
+        }       
         [HttpGet]
         public IActionResult Detail(int id)
         {
+            var comments=_iComment.GetMovieComments(id);
+            List<CommentVM> commentsVM = new List<CommentVM>();           
+            commentsVM = comments
+                       .Where(c => c.MovieId == id)
+                       .Select(s => new CommentVM()
+                       {
+                           MovieId = s.MovieId,
+                           CommentId = s.CommentId,
+                           CommentDesc = s.CommentDesc,
+                           UserName = s.UserName,
+                           UserId = s.UserId
+                       })
+                       .ToList();
+            var ratings = _iRating.GetRatings(id);
+            List<RatingVM> ratingsVM= new List<RatingVM>();
+            ratingsVM=ratings
+                      .Where(r => r.MovieId == id)
+                      .Select(s=> new RatingVM()
+                      {
+                          MovieId= s.MovieId,
+                          RatingId=s.RatingId,
+                          Ratings=s.Ratings,
+                          UserId=s.UserId
+                      })
+                      .ToList();
+
             var movie = _iMovie.GetByID(id);
             MovieVM movies = new MovieVM()
             {
@@ -187,11 +206,9 @@ namespace MovieAppPresentation.Controllers
                 Description = movie.Description,
                 MoviePhoto = movie.MoviePhoto,
                 Genre = movie.Genre,
+                comments = commentsVM,
+                ratings = ratingsVM,
             };
-
-            //ViewBag.Comments = _iComment.GetComments(id);
-            //ViewBag.Ratings = _iRating.GetRatings(id);
-
             return View(movies);
         }
     }

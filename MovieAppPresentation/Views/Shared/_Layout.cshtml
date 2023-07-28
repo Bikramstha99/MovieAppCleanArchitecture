@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MovieAppPresentation.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -26,13 +28,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Index">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Index">Movies</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Create">Privacy</a>
-                        </li>
+                       
                     </ul>
                 </div>
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>

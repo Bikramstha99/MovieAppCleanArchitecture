@@ -1,4 +1,4 @@
-﻿using Nest;
+﻿
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieAppPresentation.ViewModel
@@ -23,5 +23,10 @@ namespace MovieAppPresentation.ViewModel
         public double AverageRating { get; set; }
         public string MoviePhoto { get; set; }
         public List<MovieVM> Movies { get; set; }
+        public CommentVM commentVM { get; set; }
+        public List<CommentVM> comments { get; set; }
+        public RatingVM ratingVM { get; set; }
+        public List<RatingVM> ratings { get; set; }
     }
+
 }

@@ -1,0 +1,12 @@
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\bin\Debug\net7.0\MovieAppDomain.deps.json
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\bin\Debug\net7.0\MovieAppDomain.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\bin\Debug\net7.0\MovieAppDomain.pdb
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\refint\MovieAppDomain.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\MovieAppDomain.pdb
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppDomain\obj\Debug\net7.0\ref\MovieAppDomain.dll

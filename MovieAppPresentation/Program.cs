@@ -1,18 +1,16 @@
-using Microsoft.EntityFrameworkCore;
-using MovieAppApplication.Persistance;
 using MovieAppInfrastructure.DependencyInjection;
+using MovieAppInfrastructure.Persistance.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.AddDbContext<MovieDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("MvcConnectionString"),
-        b => b.MigrationsAssembly("MovieAppPresentation")));
-/*services.AddServices(configuration)*/
-;
 services.AddDataLinkLayerServices(configuration);
+//services.AddControllersWithViews();
+services.AddRazorPages();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,11 +30,24 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
+app.MapRazorPages();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Movie}/{action=Index}/{id?}");
 
+
+SeedDatabase();
 app.Run();
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initalizer();
+    }
+}

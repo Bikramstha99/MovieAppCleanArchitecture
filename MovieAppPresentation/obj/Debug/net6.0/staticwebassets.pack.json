@@ -13,12 +13,32 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\035f3dcb-f374-4661-a31e-265aef423eea.jpg",
+      "PackagePath": "staticwebassets\\images\\035f3dcb-f374-4661-a31e-265aef423eea.jpg"
+    },
+    {
       "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\171a59ca-f00c-439b-a3e6-e30493cf14ae.jpg",
       "PackagePath": "staticwebassets\\images\\171a59ca-f00c-439b-a3e6-e30493cf14ae.jpg"
     },
     {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\175b706b-fba8-4510-9045-cbc0883f768b.jpg",
+      "PackagePath": "staticwebassets\\images\\175b706b-fba8-4510-9045-cbc0883f768b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\31bbb8ae-c955-4ed0-a85b-68e80c37e2ec.jpeg",
+      "PackagePath": "staticwebassets\\images\\31bbb8ae-c955-4ed0-a85b-68e80c37e2ec.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\5c2e8792-4303-49c5-98f3-64088d224c86.jpg",
+      "PackagePath": "staticwebassets\\images\\5c2e8792-4303-49c5-98f3-64088d224c86.jpg"
+    },
+    {
       "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\8f4632c9-d7cb-4824-a2ad-f9011cc2ea45.jpg",
       "PackagePath": "staticwebassets\\images\\8f4632c9-d7cb-4824-a2ad-f9011cc2ea45.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\946b29f2-4abd-4c96-81ee-d610d22e925e.jpg",
+      "PackagePath": "staticwebassets\\images\\946b29f2-4abd-4c96-81ee-d610d22e925e.jpg"
     },
     {
       "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\a2a5f784-8aab-4efa-a28e-8cd7a81c0484.jpg",
@@ -259,6 +279,10 @@
     {
       "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\updateimages\\d9cad549-456f-4fce-8fe9-7b69d00ce3cc.jpeg",
+      "PackagePath": "staticwebassets\\updateimages\\d9cad549-456f-4fce-8fe9-7b69d00ce3cc.jpeg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.MovieAppPresentation.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MovieAppPresentation.ViewModel.RatingVM>
+
+<div class="card card-outline-secondary my-4">
+    <div class="card-header">
+        <b>Rating Section</b>
+    </div>
+    <div class="card-body">
+        <div id="ratingList" style="display: none;">
+            @foreach (var rating in Model)
+            {
+                <div>
+                    <div data-rating-id="@rating.RatingId">
+                        <p>
+                            @for (int i = 0; i < rating.Ratings; i++)
+                            {
+                                <span>&#9733;</span>
+                            }
+                        </p>
+                        <small class="text-muted">Rated By @rating.UserId</small>
+                        <br>
+                        <hr>
+                    </div>
+                </div>
+            }
+        </div>
+        <button id="showRatingsButton" class="btn btn-primary">Show Ratings</button>
+    </div>
+</div>

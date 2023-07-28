@@ -1,0 +1,35 @@
+﻿
+
+@*<style>
+    .form{
+        display:flex;
+        align-items:center;
+        /*background-color:gray;*/
+        width:50%;
+        margin-left:20%;
+    }
+    .text-area{
+        width:400px;
+    }
+    .button{
+        position:relative;
+        top:-3px;
+    }
+
+
+    
+</style>*@
+
+<div class="row">
+    <div class="col-md-4 form">
+        <form id="commentForm" method="post" asp-action="AddComment" asp-controller="Comment">
+            <div class="form-group">
+                <input type="hidden" name="MovieId" value="@Model.Id" />
+                <label class="fw-bold">Write Your Comment.</label>
+                <textarea class="form-control" rows="3" name="CommentDesc" placeholder="Comments are written here :)"></textarea>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success" id="btnComment">Leave Your Comment</button>
+        </form>
+    </div>
+</div>

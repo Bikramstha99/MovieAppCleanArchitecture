@@ -1,4 +1,5 @@
-﻿@model MovieAppPresentation.ViewModel.MovieVM
+﻿@using MovieAppInfrastructure.Persistance.Enum;
+@model MovieAppPresentation.ViewModel.MovieVM
 
 
 
@@ -44,7 +45,7 @@
         
     </dl>
 </div>
-@*<div>
+<div>
     @if (User.IsInRole(UserRole.Admin.ToString()) || User.IsInRole(UserRole.Admin.ToString()))
     {
         <br />
@@ -54,9 +55,31 @@
         </div>
     }
 </div>
-*@
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="../Rating/_AddRating" model="@Model.Id" />
 
-@*<div class="averageRatingContainer">
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="../Rating/_GetMovieRatings" model="@Model.ratings" />
+
+}
+
+@*C O M M E N T S*@
+<div class="comments" id="commentContainer">
+    <partial name="../Comment/_GetMovieComments" model="@Model.comments" />
+</div>
+
+@*C O M M E N T*@
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="comment-section">
+        <partial name="../Comment/_AddComment" model="@Model"/>
+    </div>
+}
+
+<div class="averageRatingContainer">
     <h6 style="display:inline;">Average Rating :</h6>
     <span id="average-rating">
         @for (int i = 0; i < (int)Model.AverageRating; i++)
@@ -69,61 +92,8 @@
         }
     </span>
 </div>
-*@
-@*@if (User.Identity.IsAuthenticated)
-{
-    
-    <partial name="../Rating/_AddRating" model="@Model?.Id" />
 
 
-}*@
-@*<partial name="../Rating/_AddRating" model="@Model?.Id" />*@
-
-
-
-@*<hr />
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="card card-outline-secondary my-4">
-        <div class="card-header">
-            <b>Comment Section</b>
-        </div>
-        <div class="card-body">
-            <div>
-                @foreach (var comment in ViewBag.Comments)
-                {
-                    <div>
-                        <p>@comment.CommentDesc</p>
-                        <small class="text-muted">Posted By @comment.CommentId @comment.UserName on @comment.TimeStamp </small>
-                        <br>
-
-                        @if (User.Identity.IsAuthenticated && User.Identity.Name == comment.UserName)
-                        {
-                            <a class="btn btn-primary btn-sm btn-edit" asp-controller="Comment" asp-action="Edit" asp-route-CommentId="@comment.CommentId">Edit</a>
-
-                            <a class="btn btn-danger btn-sm" asp-controller="Comment" asp-action="Delete" asp-route-CommentId="@comment.CommentId" asp-route-MovieId="@comment.MovieId">Delete</a>
-                        }
-                        
-                        <hr>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-}*@
-@*@if (User.Identity.IsAuthenticated)
-{
-
-    <form id="commentForm" method="post" asp-action="Create" asp-controller="Comment">
-        <div class="form-group">
-            <input type="hidden" name="MovieId" value="@Model.Id" />
-            <label class="fw-bold">Write Your Comment.</label>
-            <textarea class="form-control" rows="3" name="CommentDesc" placeholder="Comments are written here :)"></textarea>
-        </div>
-        <br />
-        <button type="submit" class="btn btn-success" id="btnComment">Leave Your Comment</button>
-    </form>
-    }
 
 @section Scripts{
     <script>
@@ -197,8 +167,7 @@
         });
     </script>
 }
-*@
-    
+ 
 
     
 
