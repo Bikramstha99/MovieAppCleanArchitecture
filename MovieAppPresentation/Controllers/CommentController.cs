@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieAppApplication.Interface.IRepository;
+using MovieAppApplication.Interface.IServices;
 using MovieAppDomain.Entities;
 using MovieAppInfrastructure.Implementation.Repository;
 using MovieAppPresentation.ViewModel;
@@ -11,12 +12,16 @@ namespace MovieAppPresentation.Controllers
     {
 
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ICommentService _iCommentService;
+        private readonly IMovieService _iMovieService;
+        private readonly IUnitOfWOrk _iUnitOfWork;
         private readonly ICommentRepository _iComment;
 
-        public CommentController(UserManager<IdentityUser> userManager, ICommentRepository iComment)
+        public CommentController(UserManager<IdentityUser> userManager, ICommentService iCommentService, IMovieService iMovieService)
         {
             _userManager = userManager;
-            _iComment = iComment;
+            _iCommentService = iCommentService;
+            _iMovieService = iMovieService;
         }
 
         public IActionResult AddComment()
@@ -36,7 +41,7 @@ namespace MovieAppPresentation.Controllers
                 comment.CommentDesc = commentVM.CommentDesc;
                 comment.UserName = Username;
                 comment.MovieId = commentVM.MovieId;
-                _iComment.AddComment(comment);
+                _iCommentService.AddComment(comment);
                 return RedirectToAction("Detail", "Movie", new { id = commentVM.MovieId });
             }
             catch (Exception ex)
@@ -48,7 +53,7 @@ namespace MovieAppPresentation.Controllers
          [HttpGet]
         public IActionResult Edit(int CommentId)
         {
-            var comment = _iComment.GetByCommentId(CommentId);
+            var comment = _iCommentService.GetByCommentId(CommentId);
             CommentVM commentvm = new CommentVM()
             {
                 MovieId = comment.MovieId,
@@ -61,19 +66,19 @@ namespace MovieAppPresentation.Controllers
         [HttpPost]
         public IActionResult Edit(CommentVM updatecomment)
         {
-            var comment= _iComment.GetByCommentId(updatecomment.CommentId);
+            var comment= _iCommentService.GetByCommentId(updatecomment.CommentId);
             comment.UserId = _userManager.GetUserId(User);
             comment.UserName = _userManager.GetUserName(User);
             comment.TimeStamp = DateTime.Now;
             comment.CommentDesc = updatecomment.CommentDesc;
-            _iComment.UpdateComment(comment);
+            _iCommentService.UpdateComment(comment);
             return RedirectToAction("Detail","Movie", new { id = updatecomment.MovieId });
         }
 
         [HttpGet]
         public IActionResult Delete(int CommentId)
         { 
-            var comment = _iComment.GetByCommentId(CommentId);
+            var comment = _iCommentService.GetByCommentId(CommentId);
             CommentVM commentvm = new CommentVM()
             {
                 MovieId = comment.MovieId,
@@ -86,12 +91,12 @@ namespace MovieAppPresentation.Controllers
         [HttpPost]
         public IActionResult Delete(CommentVM deletecomment)
         {
-            var comment = _iComment.GetByCommentId(deletecomment.CommentId);
+            var comment = _iCommentService.GetByCommentId(deletecomment.CommentId);
             comment.UserId = _userManager.GetUserId(User);
             comment.UserName = _userManager.GetUserName(User);
             comment.TimeStamp = DateTime.Now;
             comment.CommentDesc = deletecomment.CommentDesc;
-            _iComment.DeleteComment(comment);  
+            _iCommentService.DeleteComment(comment);  
             return RedirectToAction("Detail","Movie",new {id=deletecomment.MovieId});
         }
 

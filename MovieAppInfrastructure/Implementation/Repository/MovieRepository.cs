@@ -1,5 +1,6 @@
 ﻿using MovieAppApplication.Interface.IRepository;
 using MovieAppDomain.Entities;
+using MovieAppInfrastructure.Implementation.Repository;
 using MovieAppInfrastructure.Persistance;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
         public bool AddMovies(Movies movie)
         {
             _movieDbContext.Movies.Add(movie);
-            _movieDbContext.SaveChanges();
+            //_movieDbContext.SaveChanges();
+            //_iUnitOfWork.Save();
             return true;
         }
 
@@ -41,7 +43,8 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
             movie.Director = movie.Director;
             movie.Description = movie.Description;
             movie.AverageRating = movie.AverageRating;
-            _movieDbContext.SaveChanges();
+            //_movieDbContext.SaveChanges();
+            //_iUnitOfWork.Save();
             return true;
         }
 
@@ -49,7 +52,7 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
         {
             var movie = _movieDbContext.Movies.Find(Id);
             _movieDbContext.Movies.Remove(movie);
-            _movieDbContext.SaveChanges();
+            //_movieDbContext.SaveChanges();
             return true;
         }
 

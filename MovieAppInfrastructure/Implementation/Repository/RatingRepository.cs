@@ -58,7 +58,7 @@ namespace MovieAppInfrastructure.Implementation.Repository
         {
             var ratings = _movieDbContext.Ratings.FirstOrDefault(x => x.UserId == rating.UserId && x.MovieId == rating.MovieId);
             ratings.Ratings = rating.Ratings;
-            _movieDbContext.Ratings.Update(rating);
+            _movieDbContext.Ratings.Update(ratings);
             _movieDbContext.SaveChanges();
             return true;
         }

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieAppApplication.Interface.IRepository;
+using MovieAppApplication.Interface.IServices;
 using MovieAppInfrastructure.Implementation.NewFolder;
 using MovieAppInfrastructure.Implementation.Repository;
+using MovieAppInfrastructure.Implementation.Services;
 using MovieAppInfrastructure.Persistance;
 using MovieAppInfrastructure.Persistance.Seed;
 
@@ -27,6 +29,8 @@ namespace MovieAppInfrastructure.DependencyInjection
            
 
             services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<IUnitOfWOrk, UnitOfWork>();
+
 
             //if (builder.Configuration.GetValue<bool>("UseSP")) // To either use EF or SP 
             //{
@@ -36,6 +40,9 @@ namespace MovieAppInfrastructure.DependencyInjection
             //}
             //else
             //{
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();

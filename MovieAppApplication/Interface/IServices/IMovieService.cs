@@ -9,5 +9,11 @@ namespace MovieAppApplication.Interface.IServices
 {
     public interface IMovieService
     {
+        bool AddMovies(Movies movie);
+        bool UpdateMovies(Movies movie);
+        bool DeleteMovies(int Id);
+        Movies GetByID(int Id);
+        List<Movies> GetAllMovies();
+
     }
 }

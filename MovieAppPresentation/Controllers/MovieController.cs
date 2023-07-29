@@ -1,6 +1,8 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieAppApplication.Interface.IRepository;
+using MovieAppApplication.Interface.IServices;
 using MovieAppDomain.Entities;
 using MovieAppPresentation.ViewModel;
 using System.Data;
@@ -9,21 +11,25 @@ namespace MovieAppPresentation.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly IMovieRepository _iMovie;
+        private readonly IMovieService _iMovieService;
+        private readonly IRatingService _iRatingService;
+        private readonly ICommentService _iCommentService;
         private readonly IWebHostEnvironment _iwebhostenvironment;
-        private readonly ICommentRepository _iComment;
-        private readonly IRatingRepository _iRating;
+        
 
         public MovieController(
-            IMovieRepository imovie,
-            IWebHostEnvironment iwebhostenvironment,
-            ICommentRepository iComment,
-            IRatingRepository iRating)
+            IMovieService iMovieService,
+            IRatingService iRatingService,
+            ICommentService iCommentService,
+            IWebHostEnvironment iwebhostenvironment
+           )
         {
-            _iMovie = imovie;
+            
+            _iMovieService = iMovieService;
+            _iRatingService = iRatingService;
+            _iCommentService = iCommentService;
             _iwebhostenvironment = iwebhostenvironment;
-            _iComment = iComment;
-            _iRating = iRating;
+           
         }
         //To show the list of movie 
         [HttpGet]
@@ -31,7 +37,7 @@ namespace MovieAppPresentation.Controllers
         {
             int pageNumber = page;
             int pageSize = 3;
-            var movies = _iMovie.GetAllMovies();
+            var movies = _iMovieService.GetAllMovies();
             var movieViewModels = new List<MovieVM>();
             foreach (var movie in movies)
             {
@@ -93,8 +99,7 @@ namespace MovieAppPresentation.Controllers
                 MoviePhoto = addmovie.MoviePhoto,
                 Genre = addmovie.Genre,
             };
-            _iMovie.AddMovies(movie);
-
+            _iMovieService.AddMovies(movie);
             return RedirectToAction("Index");
 
         }
@@ -103,7 +108,7 @@ namespace MovieAppPresentation.Controllers
         [HttpGet]
         public IActionResult Delete(int Id)
         {
-            var movie = _iMovie.GetByID(Id);
+            var movie = _iMovieService.GetByID(Id);
             MovieVM movievm = new MovieVM()
             {
                 Id = movie.Id,
@@ -119,16 +124,15 @@ namespace MovieAppPresentation.Controllers
         [HttpPost]
         public IActionResult DeleteId(int Id)
         {
-            _iMovie.DeleteMovies(Id);
-
+            _iMovieService.DeleteMovies(Id);
             return RedirectToAction("Index");
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            var movie = _iMovie.GetByID(Id);
+            var movie = _iMovieService.GetByID(Id);
             MovieVM movies = new MovieVM()
             {
                 Id = movie.Id,
@@ -140,7 +144,7 @@ namespace MovieAppPresentation.Controllers
             };
             return View(movies);
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(MovieVM editmovie)
         {
@@ -164,14 +168,15 @@ namespace MovieAppPresentation.Controllers
                 MoviePhoto = editmovie.MoviePhoto,
                 Genre = editmovie.Genre,
             };
-            _iMovie.UpdateMovies(movie);
+            _iMovieService.UpdateMovies(movie);
+           
             return RedirectToAction("Index");
 
         }       
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            var comments=_iComment.GetMovieComments(id);
+            var comments= _iCommentService.GetMovieComments(id);
             List<CommentVM> commentsVM = new List<CommentVM>();           
             commentsVM = comments
                        .Where(c => c.MovieId == id)
@@ -184,7 +189,7 @@ namespace MovieAppPresentation.Controllers
                            UserId = s.UserId
                        })
                        .ToList();
-            var ratings = _iRating.GetRatings(id);
+            var ratings = _iRatingService.GetRatings(id);
             List<RatingVM> ratingsVM= new List<RatingVM>();
             ratingsVM=ratings
                       .Where(r => r.MovieId == id)
@@ -197,7 +202,7 @@ namespace MovieAppPresentation.Controllers
                       })
                       .ToList();
 
-            var movie = _iMovie.GetByID(id);
+            var movie = _iMovieService.GetByID(id);
             MovieVM movies = new MovieVM()
             {
                 Id = movie.Id,
@@ -205,6 +210,7 @@ namespace MovieAppPresentation.Controllers
                 Director = movie.Director,
                 Description = movie.Description,
                 MoviePhoto = movie.MoviePhoto,
+                AverageRating=movie.AverageRating,
                 Genre = movie.Genre,
                 comments = commentsVM,
                 ratings = ratingsVM,

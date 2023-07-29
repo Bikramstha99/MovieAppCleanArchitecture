@@ -1,6 +1,4 @@
-﻿
-
-using MovieAppDomain.Entities;
+﻿using MovieAppDomain.Entities;
 
 namespace MovieAppApplication.Interface.IRepository
 {

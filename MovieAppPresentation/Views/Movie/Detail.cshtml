@@ -55,6 +55,20 @@
         </div>
     }
 </div>
+
+<div class="averageRatingContainer">
+    <h6 style="display:inline;">Average Rating :</h6>
+    <span id="average-rating">
+        @for (int i = 0; i < (int)Model.AverageRating; i++)
+        {
+            <span style="color: orange; font-size: 28px;">&#9733;</span>
+        }
+        @if (Model.AverageRating - (int)Model.AverageRating >= 0.5)
+        {
+            <span class="half-star">&#9733;</span>
+        }
+    </span>
+</div>
 @if (User.Identity.IsAuthenticated)
 {
     <partial name="../Rating/_AddRating" model="@Model.Id" />
@@ -79,19 +93,7 @@
     </div>
 }
 
-<div class="averageRatingContainer">
-    <h6 style="display:inline;">Average Rating :</h6>
-    <span id="average-rating">
-        @for (int i = 0; i < (int)Model.AverageRating; i++)
-        {
-            <span style="color: orange; font-size: 28px;">&#9733;</span>
-        }
-        @if (Model.AverageRating - (int)Model.AverageRating >= 0.5)
-        {
-            <span class="half-star">&#9733;</span>
-        }
-    </span>
-</div>
+
 
 
 

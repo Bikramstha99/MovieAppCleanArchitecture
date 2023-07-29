@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieAppApplication.Interface.IRepository;
+using MovieAppApplication.Interface.IServices;
 using MovieAppDomain.Entities;
 using MovieAppPresentation.ViewModel;
 
@@ -9,27 +10,25 @@ namespace MovieAppPresentation.Controllers
     public class RatingController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-
-        private readonly IRatingRepository _iRating;
-        private readonly IMovieRepository _iMovieRepo;
+        private readonly IRatingService _iRatingService;
+        private readonly IMovieService _iMovieService;
 
         public RatingController
             (
                 UserManager<IdentityUser> userManager,
-                IRatingRepository ratingService,
-                IMovieRepository iMovieRepo
+                IRatingService iRatingService,
+                IMovieService iMovieService
             )
         {
             _userManager = userManager;
-
-            _iRating = ratingService;
-            _iMovieRepo = iMovieRepo;
+            _iRatingService = iRatingService;
+            _iMovieService = iMovieService;
         }
         [HttpPost]
         public IActionResult SubmitRating([Bind("MovieId,Ratings")] RatingVM ratingvm)
         {
             ratingvm.UserId = _userManager.GetUserId(User);
-            int rate = _iRating.GetRatingByUserIdAndMovieId(ratingvm.UserId, ratingvm.MovieId);
+            int rate = _iRatingService.GetRatingByUserIdAndMovieId(ratingvm.UserId, ratingvm.MovieId);
             Rating ratings = new Rating()
             {
                 RatingId = ratingvm.RatingId,
@@ -40,18 +39,18 @@ namespace MovieAppPresentation.Controllers
             };
             if (rate == 0)
             {
-                _iRating.AddRating(ratings);
+                _iRatingService.AddRating(ratings);
             }
             else
             {
-                _iRating.UpdateRating(ratings);
+                _iRatingService.UpdateRating(ratings);
             }
-            double averageRating = _iRating.GetAverageRating(ratings.MovieId);
-            var movie = _iMovieRepo.GetByID(ratings.MovieId);
+            double averageRating = _iRatingService.GetAverageRating(ratings.MovieId);
+            var movie = _iMovieService.GetByID(ratings.MovieId);
             if (movie != null)
             {
                 movie.AverageRating = averageRating;
-                _iMovieRepo.UpdateMovies(movie);
+                _iMovieService.UpdateMovies(movie);
             }
 
 
