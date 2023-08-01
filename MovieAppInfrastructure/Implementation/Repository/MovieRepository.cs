@@ -36,13 +36,13 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
         public bool UpdateMovies(Movies movie)
         {
             var movies = _movieDbContext.Movies.Find(movie.Id);
-            movie.Id = movie.Id;
-            movie.Name = movie.Name;
-            movie.Genre = movie.Genre;
-            movie.MoviePhoto = movie.MoviePhoto;
-            movie.Director = movie.Director;
-            movie.Description = movie.Description;
-            movie.AverageRating = movie.AverageRating;
+            movies.Id = movie.Id;
+            movies.Name = movie.Name;
+            movies.Genre = movie.Genre;
+            movies.MoviePhoto = movie.MoviePhoto;
+            movies.Director = movie.Director;
+            movies.Description = movie.Description;
+            movies.AverageRating = movie.AverageRating;
             //_movieDbContext.SaveChanges();
             //_iUnitOfWork.Save();
             return true;

@@ -47,6 +47,7 @@ namespace MovieAppInfrastructure.Implementation.Services
         public bool UpdateMovies(Movies movie)
         {
             _iUnitOfWork.MovieRepo.UpdateMovies(movie);
+            _iUnitOfWork.Save();
             return true;
         }
     }

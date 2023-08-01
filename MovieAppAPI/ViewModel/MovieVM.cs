@@ -22,6 +22,5 @@ namespace MovieAppAPI.ViewModel
         [Display(Name = "Insert an Image")]
         public double AverageRating { get; set; }
         public string MoviePhoto { get; set; }
-        public List<MovieVM> Movies { get; set; }
     }
 }
