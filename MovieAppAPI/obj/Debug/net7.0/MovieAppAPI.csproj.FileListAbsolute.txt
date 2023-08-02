@@ -85,3 +85,4 @@ C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppAP
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppAPI\obj\Debug\net7.0\MovieAppAPI.pdb
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppAPI\obj\Debug\net7.0\MovieAppAPI.genruntimeconfig.cache
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppAPI\obj\Debug\net7.0\ref\MovieAppAPI.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

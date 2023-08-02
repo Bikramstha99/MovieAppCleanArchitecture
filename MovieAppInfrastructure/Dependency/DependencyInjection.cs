@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using MovieAppApplication.Interface.IRepository;
 using MovieAppApplication.Interface.IServices;
 using MovieAppInfrastructure.Implementation.NewFolder;
@@ -9,6 +11,7 @@ using MovieAppInfrastructure.Implementation.Repository;
 using MovieAppInfrastructure.Implementation.Services;
 using MovieAppInfrastructure.Persistance;
 using MovieAppInfrastructure.Persistance.Seed;
+using System.Text;
 
 namespace MovieAppInfrastructure.DependencyInjection
 {
@@ -48,7 +51,28 @@ namespace MovieAppInfrastructure.DependencyInjection
             services.AddScoped<IMovieRepository, MovieRepository>();
             //}
 
-            return services; // Add this line to fix the error
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+        .AddJwtBearer(options =>
+        {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidAudience = configuration["JWT:validAudience"],
+            ValidIssuer = configuration["JWT:validIssuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:secret"]))
+        };
+
+        });
+
+            return services; 
         }
     }
 }

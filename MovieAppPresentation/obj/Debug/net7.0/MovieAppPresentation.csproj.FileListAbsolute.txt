@@ -563,3 +563,4 @@ C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppPr
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppPresentation\bin\Debug\net7.0\refs\WindowsBase.dll
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppPresentation\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppPresentation\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+C:\Users\Acer\OneDrive\Desktop\C#consoleapp\MovieAppCleanArchitecture\MovieAppPresentation\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

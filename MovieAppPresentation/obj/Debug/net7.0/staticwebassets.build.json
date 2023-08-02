@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T6/d332v5/RfacsHTXxt9DZK+hefS6GSZr/AzUBHV8Y=",
+  "Hash": "6frsqVmEt26HQtNuMK5zml0DGGXzP+8+af5Tu3DQq2w=",
   "Source": "MovieAppPresentation",
   "BasePath": "_content/MovieAppPresentation",
   "Mode": "Default",
@@ -236,6 +236,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\5c2e8792-4303-49c5-98f3-64088d224c86.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\5d9e5df1-3da5-4167-b807-daba7ff19bec.jpg",
+      "SourceId": "MovieAppPresentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\",
+      "BasePath": "_content/MovieAppPresentation",
+      "RelativePath": "images/5d9e5df1-3da5-4167-b807-daba7ff19bec.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\5d9e5df1-3da5-4167-b807-daba7ff19bec.jpg"
     },
     {
       "Identity": "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppPresentation\\wwwroot\\images\\744635c9-a437-4c52-9b4b-c91ca70dba9b.jpg",

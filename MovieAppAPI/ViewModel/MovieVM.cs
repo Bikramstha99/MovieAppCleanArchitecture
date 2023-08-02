@@ -5,7 +5,7 @@ namespace MovieAppAPI.ViewModel
 {
     public class MovieVM
     {
-        [Key]
+        [Key] 
         public int Id { get; set; }
 
         [Required]
@@ -20,7 +20,6 @@ namespace MovieAppAPI.ViewModel
 
 
         [Display(Name = "Insert an Image")]
-        public double AverageRating { get; set; }
         public string MoviePhoto { get; set; }
     }
 }

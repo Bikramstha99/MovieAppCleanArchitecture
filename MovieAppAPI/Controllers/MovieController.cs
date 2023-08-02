@@ -14,22 +14,26 @@ namespace MovieAppAPI.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieService _iMovieService;
+     
 
         public MovieController(IMovieService iMovieService)
         {
             _iMovieService = iMovieService;
+            
         }
+
+        [Authorize(Roles ="Admin")]
 
         [HttpGet]
         public IActionResult Index()
         {
+
             var movies = _iMovieService.GetAllMovies();
-            var movieViewModels = new List<MovieVM>();
+            var movieViewModels = new List<MovieUpdateVM>();
             foreach (var movie in movies)
             {
-                movieViewModels.Add(new MovieVM
-                {
-                    Id = movie.Id,
+                movieViewModels.Add(new MovieUpdateVM
+                {                   
                     Name = movie.Name,
                     Description = movie.Description,
                     Director = movie.Director,
@@ -41,14 +45,22 @@ namespace MovieAppAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(MovieVM addmovie)
+        public IActionResult Create([FromForm]MovieCreateVM addmovie)
         {
+            var path = "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppAPI";
+            var filePath = "Images/" + addmovie.MoviePhoto.FileName;
+            var fullPath = Path.Combine(path, filePath);
+            using (var fileStreams = new FileStream(fullPath, FileMode.Create))
+            {
+                 addmovie.MoviePhoto.CopyTo(fileStreams);
+            }
+            
             Movies movie = new Movies()
             {
                 Name = addmovie.Name,
                 Director = addmovie.Director,
                 Description = addmovie.Description,
-                MoviePhoto = addmovie.MoviePhoto,
+                MoviePhoto = fullPath,
                 Genre = addmovie.Genre,
             };
             _iMovieService.AddMovies(movie);
@@ -99,8 +111,8 @@ namespace MovieAppAPI.Controllers
             };
             return Ok(movievm); // Display the edit view
         }
-        [HttpPost("Edit")]
-        public IActionResult Edit(MovieVM editmovie)
+        [HttpPost("Edits")]
+        public IActionResult Edits(MovieVM editmovie)
         {
             Movies movie = new Movies()
             {
@@ -115,5 +127,6 @@ namespace MovieAppAPI.Controllers
 
             return Ok();
         }
+
     }
 }
