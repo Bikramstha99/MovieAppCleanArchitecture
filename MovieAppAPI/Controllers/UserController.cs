@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MovieAppAPI.ViewModel;
 using MovieAppInfrastructure.Persistance;
@@ -22,7 +23,7 @@ namespace MovieAPI.Controllers
         private readonly IConfiguration _iConfiguration;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, IConfiguration iConfiguration, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, IConfiguration iConfiguration, SignInManager<IdentityUser> signInManager,MovieDbContext _movieDbContext)
         {
 
             _userManager = userManager;
@@ -42,12 +43,13 @@ namespace MovieAPI.Controllers
             var signups = new IdentityUser()
             {
                 UserName = signUp.UserName,
-                Email = signUp.Email,
+                Email = signUp.Email
+
             };
             var result = await _userManager.CreateAsync(signups, signUp.Password);
             result = await _userManager.AddToRoleAsync(signups, UserRole.User.ToString());
 
-            return Ok(signups);
+            return Ok(result);
         }
 
         [HttpPost("Login")]
@@ -58,12 +60,32 @@ namespace MovieAPI.Controllers
             {
                 return null;
             }
+            var user = await _userManager.FindByEmailAsync(login.Email);
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            // Determine the user's roles from the user's claims in the database
+            var userRoles = await _userManager.GetRolesAsync(user);
+
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, login.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                //new Claim(JwtRegisteredClaimNames.Aud, "User") // or "Admin" depending on the user's role
-            };
+                new Claim("userID", user.Id)
+             };
+
+            // Add the appropriate role claim based on whether the user is an admin or not
+            if (userRoles.Contains("Admin"))
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
+            else
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, "User"));
+            }
+
             var authSigninKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_iConfiguration["JWT:secret"]));
             var token = new JwtSecurityToken(
                 issuer: _iConfiguration["JWT:validIssuer"],
@@ -74,8 +96,8 @@ namespace MovieAPI.Controllers
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(jwt);
-
-
         }
+           
     }
 }
+

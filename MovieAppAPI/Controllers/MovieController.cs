@@ -22,9 +22,10 @@ namespace MovieAppAPI.Controllers
             
         }
 
-        [Authorize(Roles ="Admin")]
 
+        [Authorize(Roles="Admin")]
         [HttpGet]
+
         public IActionResult Index()
         {
 
