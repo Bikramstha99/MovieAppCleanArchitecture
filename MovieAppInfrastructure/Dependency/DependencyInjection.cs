@@ -49,6 +49,7 @@ namespace MovieAppInfrastructure.DependencyInjection
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IEmailService, EmailService>();
             //}
 
             services.AddAuthentication(options =>

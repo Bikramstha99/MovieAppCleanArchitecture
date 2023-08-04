@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MovieAppAPI.Controllers;
 using MovieAppAPI.ViewModel;
+using MovieAppApplication.Interface.IServices;
 using MovieAppInfrastructure.Persistance;
 using MovieAppInfrastructure.Persistance.Enum;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,13 +24,21 @@ namespace MovieAPI.Controllers
 
         private readonly IConfiguration _iConfiguration;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IEmailService _iEmailService;
+        private readonly MailController _mailController;
 
-        public AccountController(UserManager<IdentityUser> userManager, IConfiguration iConfiguration, SignInManager<IdentityUser> signInManager,MovieDbContext _movieDbContext)
+        public AccountController(UserManager<IdentityUser> userManager, 
+        IConfiguration iConfiguration,
+        SignInManager<IdentityUser> signInManager,
+        IEmailService emailService
+        )
         {
 
             _userManager = userManager;
             _iConfiguration = iConfiguration;
             _signInManager = signInManager;
+            _iEmailService = emailService;
+            
         }
 
         [HttpPost]
@@ -95,6 +105,9 @@ namespace MovieAPI.Controllers
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            var subject = "MovieAppLogin";
+            var body = $"User {login.Email} has logged in at {DateTime.Now}.";
+            _iEmailService.SendMail(subject, body);
             return Ok(jwt);
         }
            
