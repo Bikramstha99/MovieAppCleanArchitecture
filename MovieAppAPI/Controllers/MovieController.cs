@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MovieAppAPI.ViewModel;
 using MovieAppApplication.Interface.IServices;
 using MovieAppDomain.Entities;
+using MovieAppInfrastructure.Implementation.Services;
 using Nest;
 using System.Data;
+using System.Net;
 
 namespace MovieAppAPI.Controllers
 {
@@ -14,16 +17,15 @@ namespace MovieAppAPI.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _iMovieService;
-     
+
 
         public MovieController(IMovieService iMovieService)
         {
             _iMovieService = iMovieService;
-            
         }
 
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
 
         public IActionResult Index()
@@ -34,7 +36,7 @@ namespace MovieAppAPI.Controllers
             foreach (var movie in movies)
             {
                 movieViewModels.Add(new MovieUpdateVM
-                {                   
+                {
                     Name = movie.Name,
                     Description = movie.Description,
                     Director = movie.Director,
@@ -46,16 +48,16 @@ namespace MovieAppAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm]MovieCreateVM addmovie)
+        public IActionResult Create([FromForm] MovieCreateVM addmovie)
         {
             var path = "C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppAPI";
             var filePath = "Images/" + addmovie.MoviePhoto.FileName;
             var fullPath = Path.Combine(path, filePath);
             using (var fileStreams = new FileStream(fullPath, FileMode.Create))
             {
-                 addmovie.MoviePhoto.CopyTo(fileStreams);
+                addmovie.MoviePhoto.CopyTo(fileStreams);
             }
-            
+
             Movies movie = new Movies()
             {
                 Name = addmovie.Name,
@@ -128,6 +130,27 @@ namespace MovieAppAPI.Controllers
 
             return Ok();
         }
-
+        [Route("~/api/ShareMovie")]
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(int Id, string Email)
+        {
+            try
+            {
+                Movies movie = _iMovieService.GetByID(Id);
+                if (movie != null)
+                {
+                    var response = await _iMovieService.SendEmail(Id, Email);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

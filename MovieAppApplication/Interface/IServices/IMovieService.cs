@@ -14,6 +14,7 @@ namespace MovieAppApplication.Interface.IServices
         bool DeleteMovies(int Id);
         Movies GetByID(int Id);
         List<Movies> GetAllMovies();
+        Task<string> SendEmail(int Id, string Email);
 
     }
 }

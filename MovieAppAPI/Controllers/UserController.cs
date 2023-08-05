@@ -25,7 +25,6 @@ namespace MovieAPI.Controllers
         private readonly IConfiguration _iConfiguration;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailService _iEmailService;
-        private readonly MailController _mailController;
 
         public AccountController(UserManager<IdentityUser> userManager, 
         IConfiguration iConfiguration,
@@ -33,12 +32,10 @@ namespace MovieAPI.Controllers
         IEmailService emailService
         )
         {
-
             _userManager = userManager;
             _iConfiguration = iConfiguration;
             _signInManager = signInManager;
-            _iEmailService = emailService;
-            
+            _iEmailService = emailService;           
         }
 
         [HttpPost]
@@ -105,9 +102,11 @@ namespace MovieAPI.Controllers
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-            var subject = "MovieAppLogin";
-            var body = $"User {login.Email} has logged in at {DateTime.Now}.";
-            _iEmailService.SendMail(subject, body);
+            //var subject = "MovieAppLogin";
+            //var body = $"User {login.Email} has logged in at {DateTime.Now}.";
+            //_iEmailService.SendMail( subject, body);
+            //var loger = login.Email;
+            //_iEmailService.SendMail(loger,subject, body);
             return Ok(jwt);
         }
            

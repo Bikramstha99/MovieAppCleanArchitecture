@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MailKit.Net.Smtp;
 using MovieAppApplication.Interface.IServices;
+using MovieAppDomain.Entities;
 
 namespace MovieAppAPI.Controllers
 {
@@ -17,12 +18,13 @@ namespace MovieAppAPI.Controllers
             _emailService = emailService;
         }
 
-        [HttpPost]
-        public IActionResult SendMail(string body)
-        {
-            // Use _emailService to send the email
-            _emailService.SendMail("Notification from ASP.NET Core Web API", body);
-            return Ok();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> SendSMTPMail(EmailServiceVM emailServiceVM)
+        //{
+        //    // Use _emailService to send the email
+        //    //_emailService.SendMail("Bikram.stha4@gmail.com","Notification from ASP.NET Core Web API", body);
+        //    _emailService.SendSMTPMail("Notification from ASP.NET Core Web API", body);
+        //    return Ok();
+        //}
     }
 }

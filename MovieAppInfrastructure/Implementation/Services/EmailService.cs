@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using MimeKit;
 using MailKit.Net.Smtp;
+using System.Net;
+using MovieAppDomain.Entities;
+using System.Net.Mail;
+using SmtpClient = System.Net.Mail.SmtpClient;
 
 namespace MovieAppInfrastructure.Implementation.Services
 {
@@ -18,26 +22,66 @@ namespace MovieAppInfrastructure.Implementation.Services
             _configuration = configuration;
         }
 
-        public void SendMail(string subject, string body)
+
+        //public void SendMail(string subject, string body)
+        //{
+        //    {
+        //        var email = new MimeMessage();
+        //        email.From.Add(MailboxAddress.Parse(_configuration["EmailSettings:FromEmail"]));
+        //        email.To.Add(MailboxAddress.Parse(_configuration["EmailSettings:ToEmail"]));
+        //        email.Subject = subject;
+        //        email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+
+        //        using var smtp = new SmtpClient();
+        //        smtp.Connect(
+        //            _configuration["EmailSettings:SmtpServer"],
+        //            int.Parse(_configuration["EmailSettings:SmtpPort"]),
+        //            MailKit.Security.SecureSocketOptions.StartTls
+        //        );
+
+        //        smtp.Authenticate(_configuration["EmailSettings:FromEmail"], _configuration["EmailSettings:AppPassword"]);
+
+        //        smtp.Send(email);
+        //        smtp.Disconnect(true);
+        //    }
+        //}
+        public async Task<string> SendSMTPEmail(EmailServiceVM emailservice)
         {
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(_configuration["EmailSettings:FromEmail"]));
-            email.To.Add(MailboxAddress.Parse(_configuration["EmailSettings:ToEmail"]));
-            email.Subject = subject;
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+            string senderEmail = _configuration["EmailSettings:FromEmail"];
+            string senderPassword = _configuration["EmailSettings:ToEmail"];
 
-            using var smtp = new SmtpClient();
-            smtp.Connect(
-                _configuration["EmailSettings:SmtpServer"],
-                int.Parse(_configuration["EmailSettings:SmtpPort"]),
-                MailKit.Security.SecureSocketOptions.StartTls
-            );
+            string receipentEmail = emailservice.ReceiverEmail;
+            string subject = emailservice.Subject;
+            string body = emailservice.HtmlContent;
+            
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(_configuration["EmailSettings:FromEmail"], _configuration["EmailSettings:Password"]);
 
-            smtp.Authenticate(_configuration["EmailSettings:FromEmail"], _configuration["EmailSettings:AppPassword"]);
+            MailMessage mailMessage = new MailMessage
+            {
+                From = new MailAddress(senderEmail),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            };
+            mailMessage.To.Add(receipentEmail);
 
-            smtp.Send(email);
-            smtp.Disconnect(true);
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+                return "Mail Sent Successfully";
+            }
+            catch (Exception ex)
+            {
+                return $"Error Sending Mail {ex.Message}";
+            }
+            finally
+            {
+                mailMessage.Dispose();
+                smtpClient.Dispose();
+            }
         }
     }
-
 }
