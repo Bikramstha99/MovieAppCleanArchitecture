@@ -16,5 +16,6 @@ namespace MovieAppApplication.Interface.IServices
         List<Movies> GetAllMovies();
         Task<string> SendEmail(int Id, string Email);
 
+
     }
 }

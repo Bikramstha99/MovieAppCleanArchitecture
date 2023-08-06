@@ -17,6 +17,9 @@ namespace MovieAppPresentation.ViewModel
         public string Director { get; set; }
         [Required]
         public string Description { get; set; }
+        public DateTime ReleaseDate { get; set; }
+
+        public DateTime AddedDate { get; set; }
 
 
         [Display(Name = "Insert an Image")]

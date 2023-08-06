@@ -45,43 +45,46 @@ namespace MovieAppInfrastructure.Implementation.Services
         //        smtp.Disconnect(true);
         //    }
         //}
-        public async Task<string> SendSMTPEmail(EmailServiceVM emailservice)
+        public async Task<string> SendSMTPEmail(EmailServiceVM emailservices)
         {
             string senderEmail = _configuration["EmailSettings:FromEmail"];
-            string senderPassword = _configuration["EmailSettings:ToEmail"];
 
-            string receipentEmail = emailservice.ReceiverEmail;
-            string subject = emailservice.Subject;
-            string body = emailservice.HtmlContent;
-            
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new NetworkCredential(_configuration["EmailSettings:FromEmail"], _configuration["EmailSettings:Password"]);
 
-            MailMessage mailMessage = new MailMessage
-            {
-                From = new MailAddress(senderEmail),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            };
-            mailMessage.To.Add(receipentEmail);
-
             try
             {
-                await smtpClient.SendMailAsync(mailMessage);
+                
+                    string receipentEmail = emailservices.ReceiverEmail;
+                    string subject = emailservices.Subject;
+                    string body = emailservices.HtmlContent;
+
+                    MailMessage mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(senderEmail),
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    };
+                    mailMessage.To.Add(receipentEmail);
+
+                    await smtpClient.SendMailAsync(mailMessage);
+                    mailMessage.Dispose();
+                
+
                 return "Mail Sent Successfully";
             }
             catch (Exception ex)
             {
-                return $"Error Sending Mail {ex.Message}";
+                return $"Error Sending Mail: {ex.Message}";
             }
             finally
             {
-                mailMessage.Dispose();
                 smtpClient.Dispose();
             }
         }
+
     }
 }

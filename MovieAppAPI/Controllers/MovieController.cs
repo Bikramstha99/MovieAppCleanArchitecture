@@ -42,6 +42,8 @@ namespace MovieAppAPI.Controllers
                     Director = movie.Director,
                     MoviePhoto = movie.MoviePhoto,
                     Genre = movie.Genre,
+                    ReleaseDate = movie.ReleaseDate,
+                    AddedDate=DateTime.Now,
                 });
             }
             return Ok(movieViewModels);
@@ -65,6 +67,8 @@ namespace MovieAppAPI.Controllers
                 Description = addmovie.Description,
                 MoviePhoto = fullPath,
                 Genre = addmovie.Genre,
+                ReleaseDate = addmovie.ReleaseDate,
+                AddedDate=DateTime.Now,
             };
             _iMovieService.AddMovies(movie);
             return Ok();
@@ -130,7 +134,7 @@ namespace MovieAppAPI.Controllers
 
             return Ok();
         }
-        [Route("~/api/ShareMovie")]
+        [Route("~/api/SendMail")]
         [HttpPost]
         public async Task<IActionResult> SendEmail(int Id, string Email)
         {

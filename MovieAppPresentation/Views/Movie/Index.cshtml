@@ -120,7 +120,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Movie.MoviePhoto)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+                </th>
+                <th>
+                Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -140,15 +145,21 @@
                     <td>
                             @Html.DisplayFor(modelItem => item.Description)
                     </td>
-
+                   
                     <td>
                         <img src="@item.MoviePhoto" style="width: 150px; height: 150px; cursor:pointer" />
                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+
+                     </td>
+
                     <td>
                         <a class="action-links" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> Edit</a>
                             <a class="action-links" asp-action="Detail" asp-route-id="@item.Id"><i class="fas fa-eye"></i> Detail</a>
                             <a class="action-links" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i> Delete</a>
                     </td>
+               
                 </tr>
                 }
         </tbody>

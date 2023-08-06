@@ -9,5 +9,6 @@ namespace MovieAppApplication.Interface.IRepository
         bool DeleteMovies(int Id);
         Movies GetByID(int Id);
         List<Movies> GetAllMovies();
+        List<Movies> GetMovieOnDate(DateTime dateTime);
     }
 }

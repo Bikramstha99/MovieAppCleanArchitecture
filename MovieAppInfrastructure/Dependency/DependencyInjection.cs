@@ -52,26 +52,26 @@ namespace MovieAppInfrastructure.DependencyInjection
             services.AddScoped<IEmailService, EmailService>();
             //}
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-        .AddJwtBearer(options =>
-        {
-        options.SaveToken = true;
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudience = configuration["JWT:validAudience"],
-            ValidIssuer = configuration["JWT:validIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:secret"]))
-        };
+        //    services.AddAuthentication(options =>
+        //    {
+        //        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    })
+        //.AddJwtBearer(options =>
+        //{
+        //options.SaveToken = true;
+        //options.RequireHttpsMetadata = false;
+        //options.TokenValidationParameters = new TokenValidationParameters()
+        //{
+        //    ValidateIssuer = true,
+        //    ValidateAudience = true,
+        //    ValidAudience = configuration["JWT:validAudience"],
+        //    ValidIssuer = configuration["JWT:validIssuer"],
+        //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:secret"]))
+        //};
 
-        });
+        //});
 
             return services; 
         }

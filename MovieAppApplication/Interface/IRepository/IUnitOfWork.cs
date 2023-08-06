@@ -11,6 +11,7 @@ namespace MovieAppApplication.Interface.IRepository
         IMovieRepository MovieRepo { get; set; }
         ICommentRepository CommentRepo { get; set; }       
         IRatingRepository RatingRepo { get; set; }
+        
         void Save();
 
     }

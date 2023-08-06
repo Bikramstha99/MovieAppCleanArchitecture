@@ -49,6 +49,8 @@ namespace MovieAppPresentation.Controllers
                     Director = movie.Director,
                     MoviePhoto = movie.MoviePhoto,
                     Genre = movie.Genre,
+                    ReleaseDate = movie.ReleaseDate,
+                    AddedDate=DateTime.Now,
                 });
             }
             int totalMovies = movieViewModels.Count;
@@ -98,6 +100,8 @@ namespace MovieAppPresentation.Controllers
                 Description = addmovie.Description,
                 MoviePhoto = addmovie.MoviePhoto,
                 Genre = addmovie.Genre,
+                ReleaseDate= addmovie.ReleaseDate,
+                AddedDate=DateTime.Now,
             };
             _iMovieService.AddMovies(movie);
             return RedirectToAction("Index");
@@ -141,6 +145,7 @@ namespace MovieAppPresentation.Controllers
                 Description = movie.Description,
                 MoviePhoto = movie.MoviePhoto,
                 Genre = movie.Genre,
+
             };
             return View(movies);
         }

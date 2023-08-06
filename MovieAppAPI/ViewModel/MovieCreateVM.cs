@@ -17,6 +17,10 @@ namespace MovieAppAPI.ViewModel
         [Required]
         public string Description { get; set; }
 
+        public DateTime ReleaseDate { get; set; }
+
+        public DateTime AddedDate { get; set; }
+
 
         [Display(Name = "Insert an Image")]
         public double AverageRating { get; set; }

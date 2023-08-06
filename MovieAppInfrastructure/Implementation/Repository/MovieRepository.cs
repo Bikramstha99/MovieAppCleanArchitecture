@@ -62,5 +62,14 @@ namespace MovieAppInfrastructure.Implementation.NewFolder
             return data;
 
         }
+
+        public List<Movies> GetMovieOnDate(DateTime dateTime)
+        {
+            var moviesOnDate = _movieDbContext.Movies
+            .Where(movie => movie.ReleaseDate.Date == dateTime.Date)
+            .ToList();
+
+            return moviesOnDate;
+        }
     }
 }
