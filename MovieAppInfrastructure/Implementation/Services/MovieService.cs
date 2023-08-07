@@ -111,21 +111,21 @@ namespace MovieAppInfrastructure.Implementation.Services
             var layout = await File.ReadAllTextAsync(filepath);
             layout = layout.Replace("##Title##", "MovieApp");
 
-            string combinedEmailContent = ""; // Initialize an empty string to combine email content for both movies
+            string combinedEmailContent = ""; 
 
             foreach (var movie in movies)
             {
                 // ... construct the email content for each movie ...
                 string imagepath = Path.Combine("C:\\Users\\Acer\\OneDrive\\Desktop\\C#consoleapp\\MovieAppCleanArchitecture\\MovieAppAPI\\Images", movie.MoviePhoto);
-                byte[] imageData = File.ReadAllBytes(imagepath);
-                string imageBase64 = Convert.ToBase64String(imageData);
+                //byte[] imageData = File.ReadAllBytes(imagepath);
+                //string imageBase64 = Convert.ToBase64String(imageData);
 
-                string imageExtension = Path.GetExtension(imagepath).TrimStart('.');
-                string imageMimeType = $"image/{imageExtension}";
-                string imageSrc = $"data:{imageMimeType};base64,{imageBase64}";
+                //string imageExtension = Path.GetExtension(imagepath).TrimStart('.');
+                //string imageMimeType = $"image/{imageExtension}";
+                //string imageSrc = $"data:{imageMimeType};base64,{imageBase64}";
 
                 string emailContent = layout
-                    //.Replace("##imagesLink##", imageSrc)
+                    .Replace("##imagesLink##", imagepath)
                     .Replace("##ImageName##", movie.Name)
                     .Replace("##movieTitle##", movie.Name)
                     .Replace("##MovieDirector##", movie.Director)

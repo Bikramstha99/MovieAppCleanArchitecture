@@ -51,8 +51,13 @@ namespace MovieAppInfrastructure.Persistance.Seed
                 SecurityStamp = Guid.NewGuid().ToString("D"),
             };
             var userManager = _userManager.CreateAsync(user, "Admin@123").GetAwaiter().GetResult();
-            var result = _dbContext.Users.FirstOrDefault(a => a.Email == "stha.bikram999@gmail.com");
-            _userManager.AddToRoleAsync(user, UserRole.Admin.ToString()).GetAwaiter().GetResult();
+            if (userManager.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
+                await _userManager.SetTwoFactorEnabledAsync(user, true); // Enable two-factor authentication
+            }
+            //var result = _dbContext.Users.FirstOrDefault(a => a.Email == "stha.bikram999@gmail.com");
+            //_userManager.AddToRoleAsync(user, UserRole.Admin.ToString()).GetAwaiter().GetResult();
             await _dbContext.SaveChangesAsync();
         }
 
