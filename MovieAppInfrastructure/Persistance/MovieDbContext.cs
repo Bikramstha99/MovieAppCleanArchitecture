@@ -12,5 +12,6 @@ namespace MovieAppInfrastructure.Persistance
         public DbSet<Movies> Movies { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<TwoFactorOTP> TwoFactorOTP { get; set; }
     }
 }
