@@ -13,8 +13,7 @@ namespace MovieAppDomain.Entities
         [Key]
         public int Id { get; set; }
 
-      
-        [ForeignKey("IdentityUser")]
+        [Required]
         public string Email { get; set; }
 
         [Required]

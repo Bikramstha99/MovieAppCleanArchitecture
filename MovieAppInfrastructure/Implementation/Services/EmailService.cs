@@ -10,6 +10,8 @@ using System.Net;
 using MovieAppDomain.Entities;
 using System.Net.Mail;
 using SmtpClient = System.Net.Mail.SmtpClient;
+using Twilio.Clients;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace MovieAppInfrastructure.Implementation.Services
 {
@@ -85,6 +87,5 @@ namespace MovieAppInfrastructure.Implementation.Services
                 smtpClient.Dispose();
             }
         }
-
     }
 }

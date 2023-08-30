@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MovieAppAPI.Controllers;
 using MovieAppAPI.ViewModel;
@@ -14,8 +15,10 @@ using MovieAppInfrastructure.Persistance;
 using MovieAppInfrastructure.Persistance.Enum;
 using Nest;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
+using Twilio;
 using static System.Net.WebRequestMethods;
 
 namespace MovieAPI.Controllers
@@ -104,7 +107,7 @@ namespace MovieAPI.Controllers
                     Email = user.Email,
                     OTP = tokens,
                     GeneratedDateTime=DateTime.Now,
-                    ExpiredDateTime= otpExpiration
+                    ExpiredDateTime= otpExpiration,
                 };
 
                 _movieDbContext.TwoFactorOTP.Add(otpEntry);
@@ -207,8 +210,134 @@ namespace MovieAPI.Controllers
             else
             {
                 return BadRequest("Invalid OTP or OTP has expired.");
+            } 
+        }
+        [HttpPost("Login-Phone")]
+        public async Task<IActionResult> LoginPhone([FromForm] string phoneNumber)
+        {
+            var user = await _movieDbContext.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+            if (user.TwoFactorEnabled)
+            {
+                var twilioSettings = _iConfiguration.GetSection("TwilioSettings");
+                var accountSid = twilioSettings["AccountSid"];
+                var authToken = twilioSettings["AuthToken"];
+                var parameters = new List<KeyValuePair<string, string>>
+             {
+                new KeyValuePair<string, string>("To", phoneNumber),
+                new KeyValuePair<string, string>("Channel", "sms")
+            };
+
+                var content = new FormUrlEncodedContent(parameters);
+
+                var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{accountSid}:{authToken}"));
+                var authHeader = new AuthenticationHeaderValue("Basic", credentials);
+
+                using (var httpClient = new HttpClient())
+                {
+
+                    httpClient.DefaultRequestHeaders.Authorization = authHeader;
+
+                    var response = httpClient.PostAsync("https://verify.twilio.com/v2/Services/VA5c1c990b3121b9fbc8a9b0e0aa86dd31/Verifications", content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return Ok("OTP sent successfully");
+                    }
+                    else
+                    {
+                        return BadRequest("Failed to send OTP");
+                    }
+                }
             }
-  
+                // Determine the user's roles from the user's claims in the database
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                var authClaims = new List<Claim>
+                 {
+                new Claim(ClaimTypes.Name, phoneNumber),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("userID", user.Id)
+                 };
+    
+                // Add the appropriate role claim based on whether the user is an admin or not
+                if (userRoles.Contains("Admin"))
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                }
+                else
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, "User"));
+                }
+
+                var authSigninKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_iConfiguration["JWT:secret"]));
+                var token = new JwtSecurityToken(
+                    issuer: _iConfiguration["JWT:validIssuer"],
+                    audience: _iConfiguration["JWT:validAudience"],
+                    expires: DateTime.Now.AddDays(1),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
+                    );
+
+
+                var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+                return Ok(jwt);           
+        }
+
+        [HttpPost("LoginPhone-2FA")]
+        public async Task<IActionResult> LoginWithOTPPhone(string code, string phoneNumber)
+        {
+            var user = await _movieDbContext.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+            if (user != null)
+            {
+                var latestOtpEntry = await _movieDbContext.TwoFactorOTP
+                .Where(otp => otp.Email == user.Email && otp.ExpiredDateTime > DateTime.UtcNow)
+                .OrderByDescending(otp => otp.GeneratedDateTime) // Order by GeneratedDateTime in descending order
+          .FirstOrDefaultAsync();
+
+                if (latestOtpEntry != null && latestOtpEntry.OTP == code)
+                {
+                    var authClaims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.Email),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                            new Claim("userID", user.Id)
+                         };
+
+                    var userRoles = await _userManager.GetRolesAsync(user);
+
+                    // Add the appropriate role claim based on whether the user is an admin or not
+                    if (userRoles.Contains("Admin"))
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    }
+                    else
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, "User"));
+                    }
+
+                    var authSigninKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_iConfiguration["JWT:secret"]));
+                    var token = new JwtSecurityToken(
+                        issuer: _iConfiguration["JWT:validIssuer"],
+                        audience: _iConfiguration["JWT:validAudience"],
+                        expires: DateTime.Now.AddDays(1),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
+                    );
+                    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+                    //_movieDbContext.TwoFactorOTP.Remove(latestOtpEntry);
+                    //await _movieDbContext.SaveChangesAsync();
+
+                    return Ok(jwt);
+                }
+                else
+                {
+                    return BadRequest("Two-factor authentication failed.");
+                }
+            }
+            else
+            {
+                return BadRequest("Invalid OTP or OTP has expired.");
+            }
         }
     }
 }

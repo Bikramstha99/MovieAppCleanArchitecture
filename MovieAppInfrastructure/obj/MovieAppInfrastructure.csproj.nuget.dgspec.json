@@ -218,6 +218,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[6.10.1, )"
             }
           },
           "imports": [
